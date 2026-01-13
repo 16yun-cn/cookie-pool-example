@@ -6,7 +6,7 @@
 
 - **DrissionPage 混合模式**:
   - **浏览器模式**: 使用真实的 Chromium 实现生成有效的访客 Cookie (SUB/SUBP)。
-  - **Session 模式**: 共享浏览器的 Cookie 和 UA，进行高并发数据抓取。
+- **curl_cffi 模式**: 共享浏览器的 Cookie 和 UA，进行高并发数据抓取。
 - **RQ 解耦架构**: 分离 `Cookie` 和 `Search` Worker，提升稳定性和扩展性。
 - **智能代理**: 集成 IP 代理，支持自动切换与持久化。
 - **数据持久化**: Redis (用于去重/缓存) 和 JSONL 日志 (用于持久化) 双重存储。
