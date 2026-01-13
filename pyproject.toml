@@ -1,0 +1,81 @@
+[project]
+name = "weibo-search"
+version = "0.2.0"
+description = "微博搜索爬虫系统 - DrissionPage Hybrid Mode + RQ Workers"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # Redis & Task Queue
+    "redis>=5.0.0",
+    "rq>=1.16.0",
+    "rq-dashboard>=0.6.0",
+    
+    # Data Validation & Settings
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    
+    # CLI
+    "typer>=0.9.0",
+    "rich>=13.0.0",
+    "DrissionPage==4.1.1.2",
+    
+    # HTTP Client (curl_cffi for proper HTTPS proxy support)
+    # Mac dev: use 0.13.0 (stable); Linux prod: latest version
+    "curl_cffi==0.13.0",
+    
+    # Utils
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    # Testing
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-mock>=3.10.0",
+    
+    # Code Quality
+    "pylint>=3.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "mypy>=1.5.0",
+    
+    # Type Stubs
+    "types-redis>=4.5.0",
+]
+
+[project.scripts]
+weibo-worker = "weibo_search.cli.worker:main"
+weibo-search = "weibo_search.cli.search:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/weibo_search"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --cov=src/weibo_search --cov-report=term-missing"
+
+[tool.black]
+line-length = 88
+target-version = ["py310"]
+
+[tool.isort]
+profile = "black"
+line_length = 88
+src_paths = ["src", "tests"]
+
+[tool.pylint.messages_control]
+disable = ["C0114", "C0115", "C0116", "R0903"]
+
+[tool.pylint.format]
+max-line-length = 88
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
