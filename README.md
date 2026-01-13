@@ -17,14 +17,14 @@
 - [uv](https://github.com/astral-sh/uv) (或者使用 poetry/pip)
 - Redis 5.0+
 - Google Chrome / Chromium
-
+- 如果使用了 16yun 爬虫代理，需要使用 https://github.com/16yun-cn/portunnel-realase 转化为本地 无须auth认证的模式。DrissionPage的chrome模式对auth认证采用的是插件模式，效率比较低。
 ## 快速开始
 
 ### 1. 安装与配置
 
 ```bash
 # 安装依赖
-make install
+make install # uv sync
 
 # 配置环境
 cp .env.example .env
